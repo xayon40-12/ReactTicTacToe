@@ -54,7 +54,7 @@ export default function TicTacToe(): JSX.Element {
   }
 
   return (<>
-    <div style={{ display: "grid", gridTemplateColumns: "20vmin 60vmin 20vmin" }}>
+    <div style={{ display: "grid", gridTemplateColumns: "25vmin 50vmin 25vmin" }}>
 
       <div></div>
       <div><h1 style={{ textAlign: "center", fontSize: "10vmin" }}>TicTacToe</h1></div>
@@ -71,8 +71,7 @@ export default function TicTacToe(): JSX.Element {
         </div>
       </div>
       <div>
-        <div style={{ width: "12ch" }}></div>
-        <ol>{history.map(h => <li>{h}</li>)}</ol>
+        <ol>{history.map(h => <li style={{fontSize: "2.5vmin"}}>{h}</li>)}</ol>
       </div>
 
     </div>
