@@ -6,7 +6,7 @@ interface SquareProps {
   nextState: () => void,
 }
 
-function Square({state, nextState}: SquareProps): JSX.Element {
+function Square({ state, nextState }: SquareProps): JSX.Element {
   return <button className="square" onClick={nextState}>{state}</button>;
 }
 
@@ -27,19 +27,19 @@ export default function TicTacToe(): JSX.Element {
     [2, 4, 6]
   ];
   var done: string | undefined = undefined;
-  for(var [a, b, c] of lines) {
-    if(states[a] === states[b] && states[b] === states[c]) {
+  for (var [a, b, c] of lines) {
+    if (states[a] === states[b] && states[b] === states[c]) {
       done = states[a];
       break;
     }
   }
   const message = done ? "Victory: " + done : "Next: " + current;
-  
+
   const [history, setHistory] = useState<string[]>([]);
   function nextState(x: number, y: number): () => void {
-    const [state, setState] = boardStates[x+3*y];
+    const [state, setState] = boardStates[x + 3 * y];
     return () => {
-      if(!done && state === "") {
+      if (!done && state === "") {
         setState(current);
         history.push(current + " at (" + x + ", " + y + ")");
         setHistory(history);
@@ -52,21 +52,29 @@ export default function TicTacToe(): JSX.Element {
     setHistory([]);
     boardStates.forEach(([_, set]) => set(""));
   }
-  
-  return ( <>
-    <h2>TicTacToe</h2>
-    <div className="game">
-    <div className="game-board">
-      {message}
-      {[0,1,2].map(y => <div className="board-row">
-        {[0,1,2].map(x => <Square state={boardStates[x+3*y][0]} nextState={nextState(x, y)}/>)}
-      </div>)}
-      <button onClick={reset}>Reset</button>
-    </div>
-    <div className="game-info">
-      <div style={{width: "12ch"}}></div>
-      <ol>{history.map(h => <li>{h}</li>)}</ol>
-    </div>
+
+  return (<>
+    <div style={{ display: "grid", gridTemplateColumns: "20vmin 60vmin 20vmin" }}>
+
+      <div></div>
+      <div><h1 style={{ textAlign: "center", fontSize: "10vmin" }}>TicTacToe</h1></div>
+      <div></div>
+
+      <div></div>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <div>
+          {message}
+          {[0, 1, 2].map(y => <div>
+            {[0, 1, 2].map(x => <Square state={boardStates[x + 3 * y][0]} nextState={nextState(x, y)} />)}
+          </div>)}
+          <button onClick={reset}>Reset</button>
+        </div>
+      </div>
+      <div>
+        <div style={{ width: "12ch" }}></div>
+        <ol>{history.map(h => <li>{h}</li>)}</ol>
+      </div>
+
     </div>
   </>);
 }
