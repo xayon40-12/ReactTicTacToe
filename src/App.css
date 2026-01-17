@@ -7,17 +7,22 @@
 
 .square {
   background: #fff;
-  border: 1px solid #999;
+  border: 0.5vw solid #888;
   float: left;
-  font-size: 24px;
+  font-size: 8vw;
   font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
+  height: 15vw;
+  width: 15vw;
+  margin-right: 0.3vw;
+  margin-top: 0.3vw;
   padding: 0;
   text-align: center;
-  width: 34px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .square {
+    background: #222;
+  }
 }
 
 .board-row:after {

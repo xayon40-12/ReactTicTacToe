@@ -35,13 +35,13 @@ export default function TicTacToe(): JSX.Element {
   }
   const message = done ? "Victory: " + done : "Next: " + current;
   
-  const [history, setHistory] = useState<[number, string][]>([]);
+  const [history, setHistory] = useState<string[]>([]);
   function nextState(x: number, y: number): () => void {
     const [state, setState] = boardStates[x+3*y];
     return () => {
       if(!done && state === "") {
         setState(current);
-        history.push([0, current + " at (" + x + ", " + y + ")"]);
+        history.push(current + " at (" + x + ", " + y + ")");
         setHistory(history);
         setCurrent(current === "X" ? "O" : "X");
       }
@@ -64,7 +64,8 @@ export default function TicTacToe(): JSX.Element {
       <button onClick={reset}>Reset</button>
     </div>
     <div className="game-info">
-      <ul>{history.map(([i, action]) => <li key={i}>{action}</li>)}</ul>
+      <div style={{width: "12ch"}}></div>
+      <ol>{history.map(h => <li>{h}</li>)}</ol>
     </div>
     </div>
   </>);
